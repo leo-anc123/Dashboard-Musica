@@ -20,7 +20,7 @@ st.set_page_config(
 @st.cache_data
 def load_and_clean_data():
     # Carga de datos
-    df_raw = pd.read_csv("data/encuesta_musica.tab", delimiter='\t', encoding='latin1')
+    df_raw = pd.read_csv("encuesta_musica.tab", delimiter='\t', encoding='latin1')
     df = df_raw.copy()
 
     # Identificar y limpiar columnas de géneros
@@ -136,4 +136,5 @@ with tab3:
 # SECCIÓN FINAL: EXPLORAR LOS DATOS
 # ==============================================================================
 with st.expander("Haz clic para ver una muestra de los datos limpios utilizados"):
+
     st.dataframe(df[genre_group_columns + ['GRUPOS_EDAD', 'REGION']].head(200))
