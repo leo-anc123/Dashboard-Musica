@@ -80,6 +80,7 @@ st.write("""
 Análisis de los datos de la Encuesta Nacional de Consumos Culturales (ENCC) 2022-23.
 ...
 """)
+st.subheader("¿El rock ha muerto?")
 
 # =============================================================================
 # DEFINICIÓN DE PESTAÑAS (TABS)
@@ -397,4 +398,5 @@ with tab_regresion_rock:
     - Crear puentes entre el rock clásico (atractivo para '50-64') y nuevos subgéneros.
     - Monitorear tendencias emergentes en subgéneros del rock para identificar oportunidades.
     """)
+
 
