@@ -272,7 +272,7 @@ with tab_perfil_rock:
         st.info(f"""
         - **Perfil Principal:** El rock tiene su mayor penetración en el grupo de **{rock_by_age.idxmax()}**.
         - **Geografía:** La región **{rock_by_region.idxmax()}** lidera la preferencia por el rock en el país.
-        - **Género:** Existe una brecha de preferencia de **{abs(rock_by_gender.diff().iloc[-1]):.1f}%** a favor de los **{rock_by_gender.idxmax()}**.
+        - **Género:** Existe una brecha de preferencia de **{abs(rock_by_gender.diff().iloc[-1]):.1f}%** a favor de la **{rock_by_gender.idxmax()}**.
         - **Comportamiento:** Los fans del rock son significativamente **más propensos a asistir a recitales** que los no fans.
         
         **Implicancias Estratégicas:** Capitalizar la alta asistencia a recitales, fortalecer la presencia en la región líder ({rock_by_region.idxmax()}) 
@@ -397,3 +397,4 @@ with tab_regresion_rock:
     - Crear puentes entre el rock clásico (atractivo para '50-64') y nuevos subgéneros.
     - Monitorear tendencias emergentes en subgéneros del rock para identificar oportunidades.
     """)
+
