@@ -90,8 +90,7 @@ tabs_list = [
     "📊 Resumen General",
     "🧑‍🎤 Análisis por Edad",
     "🗺️ Análisis por Región",
-    "🤘 Perfil Fan Rock",
-    "📈 Tendencia Rock (Regresión)"
+    "🤘 Perfil Fan Rock"
 ]
 tabs = st.tabs(tabs_list)
 
@@ -101,7 +100,6 @@ tab_resumen = tabs[1]
 tab_edad = tabs[2]
 tab_region = tabs[3]
 tab_perfil_rock = tabs[4]
-tab_regresion_rock = tabs[5]
 
 # =============================================================================
 # PESTAÑA 1: CONTADOR
@@ -286,6 +284,7 @@ with tab_perfil_rock:
      
         
   
+
 
 
 
