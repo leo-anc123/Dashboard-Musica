@@ -282,109 +282,7 @@ with tab_perfil_rock:
     else:
         st.warning("No se puede generar el resumen ejecutivo porque la columna 'GENERO' no existe.")
 
-# =============================================================================
-# PESTAÑA 6: TENDENCIA ROCK (REGRESIÓN)
-# =============================================================================
-with tab_regresion_rock: 
-    st.header("Análisis de Tendencias - Rock & Metal 🎸")
 
-    # 1. ANÁLISIS POR GRUPOS DE EDAD
-    st.subheader("1. Preferencia por Grupo de Edad")
-    rock_by_age = df.groupby('GRUPOS_EDAD', observed=True)['CAT_ROCK Y METAL'].mean() * 100
-    st.dataframe(rock_by_age.map("{:.1f}%".format))
-
-    # 2. PREPARANDO DATOS PARA REGRESIÓN
-    st.subheader("2. Preparando Datos para Regresión")
-    age_group_mapping = {
-        '18-29': 23.5,
-        '30-49': 39.5,
-        '50-64': 57.0,
-        '65+': 70.0
-    }
-    regression_data = []
-    for age_group, age_value in age_group_mapping.items():
-        if age_group in rock_by_age.index:
-            preference = rock_by_age[age_group]
-            regression_data.append({
-                'edad_promedio': age_value,
-                'preferencia_rock': preference,
-                'grupo_edad': age_group
-            })
-    regression_df = pd.DataFrame(regression_data)
-    st.dataframe(regression_df)
-
-# 3. REGRESIÓN LINEAL
-    st.subheader("3. Regresión Lineal - Preferencia vs. Edad")
-    
-    X = regression_df[['edad_promedio']]
-    y = regression_df['preferencia_rock']
-    model = LinearRegression()
-    model.fit(X, y)
-    y_pred = model.predict(X)
-    r2 = r2_score(y, y_pred)
-    intercept = model.intercept_
-    slope = model.coef_[0]
-
-    st.write("Resultados de la Regresión:")
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Pendiente (Slope)", f"{slope:.4f}")
-    col2.metric("R² (Precisión)", f"{r2:.4f}")
-    col3.metric("Intercepto", f"{intercept:.4f}")
-    
-    st.write(f"**Ecuación:** Preferencia = {intercept:.2f} + {slope:.2f} * Edad")
-    if slope < 0:
-        st.warning(f"**Tendencia:** DECRECIENTE. Por cada año de edad, la preferencia disminuye en {abs(slope):.3f} puntos porcentuales.")
-    else:
-        st.success(f"**Tendencia:** CRECIENTE. Por cada año de edad, la preferencia aumenta en {slope:.3f} puntos porcentuales.")
-
-    # 4. VISUALIZACIÓN DE LA TENDENCIA
-    st.subheader("4. Visualización de la Tendencia")
-    
-    fig_reg, ax_reg = plt.subplots(figsize=(12, 8))
-    
-    # Gráfico de dispersión
-    ax_reg.scatter(regression_df['edad_promedio'], regression_df['preferencia_rock'],
-                   s=100, alpha=0.7, color='red', label='Datos observados')
-    
-    # Línea de regresión
-    x_range = np.linspace(regression_df['edad_promedio'].min() - 5,
-                          regression_df['edad_promedio'].max() + 10, 100)
-    y_range = model.predict(x_range.reshape(-1, 1))
-    ax_reg.plot(x_range, y_range, 'b-', linewidth=2, label=f'Línea de Regresión (R² = {r2:.3f})')
-
-    # Proyección futura
-    edad_promedio_actual = df['EDAD'].mean()
-    edad_5_anos = edad_promedio_actual + 5
-    preferencia_5_anos = model.predict([[edad_5_anos]])[0]
-    
-    ax_reg.axvline(x=edad_5_anos, color='green', linestyle='--', alpha=0.7, label=f'Proyección a 5 años (Edad {edad_5_anos:.1f})')
-    ax_reg.plot(edad_5_anos, preferencia_5_anos, 'go', markersize=10, label=f'Preferencia Proyectada: {preferencia_5_anos:.1f}%')
-
-    ax_reg.set_xlabel('Edad Promedio del Grupo', fontsize=12)
-    ax_reg.set_ylabel('Preferencia por Rock y Metal (%)', fontsize=12)
-    ax_reg.set_title('TENDENCIA GENERACIONAL - ROCK Y METAL', fontsize=14, fontweight='bold')
-    ax_reg.legend()
-    ax_reg.grid(True, alpha=0.3)
-    
-    # Añadir etiquetas
-    for i, row in regression_df.iterrows():
-        ax_reg.annotate(row['grupo_edad'], (row['edad_promedio'], row['preferencia_rock']),
-                        textcoords="offset points", xytext=(0,10), ha='center', fontsize=9)
-    
-    st.pyplot(fig_reg)
-
-    # 5. RECOMENDACIONES ESTRATÉGICAS
-    st.header("Recomendaciones Estratégicas")
-    
-    col1, col2, col3 = st.columns(3)
-    rock_by_age_mean = rock_by_age.mean()
-    rock_by_age_max_group = rock_by_age.idxmax()
-    rock_by_age_max_val = rock_by_age.max()
-    
-    col1.metric("Preferencia Promedio", f"{rock_by_age_mean:.1f}%")
-    col2.metric("Grupo Más Afín", rock_by_age_max_group, f"{rock_by_age_max_val:.1f}%")
-    
-    if slope < -0.1:
         st.warning("ALERTA: Fuerte tendencia decreciente generacional. Enfocarse en renovación de audiencia.")
     elif slope < -0.05:
         st.warning("TENDENCIA: Moderadamente decreciente. Balancear programación generacional.")
@@ -398,5 +296,6 @@ with tab_regresion_rock:
     - Crear puentes entre el rock clásico (atractivo para '50-64') y nuevos subgéneros.
     - Monitorear tendencias emergentes en subgéneros del rock para identificar oportunidades.
     """)
+
 
 
