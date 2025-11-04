@@ -283,13 +283,10 @@ with tab_perfil_rock:
         st.warning("No se puede generar el resumen ejecutivo porque la columna 'GENERO' no existe.")
 
 
-        st.warning("ALERTA: Fuerte tendencia decreciente generacional. Enfocarse en renovación de audiencia.")
-    elif slope < -0.05:
-        st.warning("TENDENCIA: Moderadamente decreciente. Balancear programación generacional.")
-    else:
-        st.success("TENDENCIA: Estable. Mantener y fortalecer la base de oyentes existente.")
+     
         
   
+
 
 
 
