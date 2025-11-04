@@ -289,13 +289,8 @@ with tab_perfil_rock:
     else:
         st.success("TENDENCIA: Estable. Mantener y fortalecer la base de oyentes existente.")
         
-    st.write("---")
-    st.subheader("Acciones Recomendadas")
-    st.info("""
-    - Desarrollar contenidos que conecten con audiencias más jóvenes (ej: '18-29').
-    - Crear puentes entre el rock clásico (atractivo para '50-64') y nuevos subgéneros.
-    - Monitorear tendencias emergentes en subgéneros del rock para identificar oportunidades.
-    """)
+  
+
 
 
 
