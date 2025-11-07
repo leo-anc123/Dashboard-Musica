@@ -110,13 +110,13 @@ with tab_contador:
     st.metric(label="Total de Encuestas Válidas", value=f"{total_registros:,}")
     # 1. ANÁLISIS DE LA ESTRUCTURA DEL DATASET
 # =============================================================================
-st.subheader("\n1. 🏗️ ANÁLISIS DE LA ESTRUCTURA DEL DATASET")
-
-# Dimensiones básicas
-st.subheader(f"📊 DIMENSIONES:")
-st.subheader(f" • Filas (individuos): {df.shape[0]:,}")
-st.subheader(f" • Columnas (variables): {df.shape[1]}")
-st.subheader(f" • Total de celdas: {df.shape[0] * df.shape[1]:,}")
+    st.subheader("\n1. 🏗️ ANÁLISIS DE LA ESTRUCTURA DEL DATASET")
+    
+    # Dimensiones básicas
+    st.subheader(f"📊 DIMENSIONES:")
+    st.subheader(f" • Filas (individuos): {df.shape[0]:,}")
+    st.subheader(f" • Columnas (variables): {df.shape[1]}")
+    st.subheader(f" • Total de celdas: {df.shape[0] * df.shape[1]:,}")
 # =============================================================================
 # PESTAÑA 2: RESUMEN GENERAL
 # =============================================================================
@@ -292,6 +292,7 @@ with tab_perfil_rock:
      
         
   
+
 
 
 
